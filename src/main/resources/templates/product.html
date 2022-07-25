@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<head>
+    <meta charset="UTF-8">
+    <title>Product </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body  class="text-center">
+<div class="form-control d-flex justify-content-center">
+    <div class="section-headline">
+        <h1 th:text="${product.name}"></h1>
+    </div>
+    <div class="row panel-footer">
+        <div th:inline="text" class="col-md-2">Цена: [[${product.price}]] $</div>
+        <div th:inline="text" class="col-md-9">В наличии: [[${product.count}]]</div>
+
+        <div>
+            <form action="#" th:action="@{/shopcart/addcartItem}" method="post">
+                <input hidden="hidden" th:value="${product.id}" name="id"/>
+                <input type="number" value="1" th:max="${product.count}" min="1" name="count"/>
+                <input type="submit" value="Добавить в корзину" />
+            </form>
+        </div>
+        </form>
+
+    </div>
+<div>
+    <form th:action="@{'delete/{id}' (id=${product.id})}" method="post">
+        <input type="submit" value="Удалить товар">
+    </form>
+</div>
+</div>
+</body>
+</html>

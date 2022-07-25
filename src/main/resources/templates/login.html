@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <title>Login</title>
+    </head>
+    <body  class="text-center">
+    <div class="form-control d-flex justify-content-center">
+        <div layout:fragment="content">
+            <form th:action="@{/login}" method="post">
+                <h1>Вход в систему</h1>
+                <div th:if="${param.error}">
+                    Неверный пароль.
+                </div>
+                <div th:if="${param.logout}">
+                    Вы вышли из системы.
+                </div>
+                <label for="inputEmail" class="sr-only">Эл. почта</label>
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
+                <label for="inputPassword" class="sr-only">Пароль</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+            </form>
+            <form class="form-signin" th:action="@{/signup}" method="get">
+                <button class="btn btn-md btn-success btn-block" type="Submit">Регистрация</button>
+            </form>
+        </div>
+    </div>
+    </body>
+</html>

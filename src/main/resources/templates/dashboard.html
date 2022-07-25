@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <title>Dashboard</title>
+    </head>
+    <body  class="text-center">
+        <div class="section-headline" layout:fragment="content">
+            <h1 th:inline="text">Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!</h1>
+            <div>
+                <div class="d-flex justify-content-right">
+                    <form action="#" th:action="@{/shopcart}" method="get">
+                        <input type="submit" value="Корзина" />
+                    </form>
+                </div>
+                    <div class="form-control d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col">
+                                <h5>Создать новый товар</h5>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col">
+                                <form th:action="@{'/dashboard/create'}" method="post">
+                                    <p>Название товара:</p> <input type = "text" name ="name"/>
+                                    <p>Цена товара:</p> <input type="text" name="price"/>
+                                    <p>кол-во товара:</p> <input type="number" value="1" min="1"  name="count"/>
+                                    <div>
+                                        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Добавить товар"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Удалить все товары</h4>
+                    <form th:action="@{'/dashboard/clear'}" method="post">
+                        <input type="submit" value="Удалить все товары">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+            <div>
+                <h4 class="">Каталог:</h4></div>
+            <div>
+                <tr th:if="${products.empty}">
+                    <td colspan="2"> Товары отсутствуют! </td>
+                </tr>
+                <tr th:each="product : ${products}">
+                    <td>
+                        <div class="row form-control">
+                            <div class="col">
+                                <p>Название: <a th:href = "@{'/dashboard/product/{id}' (id=${product.id})}"><b><span th:text="${product.name}"> </span></b></a></p>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col">
+                                <div>
+                                    <div th:switch="${product.price} != null">
+                                        <p th:case="${true}">Цена: <span th:text="${product.price}"></span></p>
+                                        <p th:case="${false}">Цена отсутствует.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col">
+                                <div>
+                                    <form action="#" th:action="@{/shopcart/addcartItem}" method="post">
+                                        <input hidden="hidden" th:value="${product.id}" name="id"/>
+                                        <input type="number" value="1" th:max="${product.count}" min="1" name="count"/>
+                                        <input type="submit" value="Добавить в корзину" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </div>
+    </body>
+</html>

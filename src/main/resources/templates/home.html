@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:layout:decorate="~{default}">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <title>Spring Security Example</title>
+    </head>
+    <body  class="text-center">
+
+    <div class="container">
+        <div class="row form-control d-flex justify-content-center">
+            <div class="col">
+                <h1>Добро пожаловать в библиотеку!</h1>
+            </div>
+            <div class="w-100"></div>
+            <div class="col">
+                <div layout:fragment="content">
+                    <div>
+                        <p>Нажми <a th:href="@{/login}">сюда</a>, чтобы увидеть каталог</p>`
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+</html>

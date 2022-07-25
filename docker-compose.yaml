@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo:5.0@sha256:981c74be62db9c39e7ebb4eaa8e1c51f40b905bb00285e8463c88c174da80674
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./.docker/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=retail
+      - MONGO_NON_ROOT_USERNAME=mongo
+      - MONGO_NON_ROOT_PASSWORD=mongo

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" th:layout:decorate="~{default}" >
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+</head>
+<body class="text-center">
+<div class="section-headline">
+    <div class="form-control">
+        <H2>Корзина</H2>
+        <div>
+            <h3>мои покупки:</h3>
+            <div>
+                <div th:inline="text">Требуется заплатить: [[${shopcart.grandTotal}]] $</div>
+
+                <tr th:each="cartItem : ${cartItemList}">
+                    <td>
+                        <div class="form-control">
+                            <div th:inline="text"> Название продукта: [[${cartItem.product.name}]] </div>
+                            <div div th:inline="text">Цена продукта: [[${cartItem.product.price}]] $</div>
+                            <div div th:inline="text">Кол-во ед. [[${cartItem.count}]]</div>
+                            <div>
+                                <form action="#" th:action="@{/shopcart/deleteItem}" method="post">
+                                    <input hidden="hidden" th:value="${cartItem.id}" name="id"/>
+                                    <input type="submit" value="Удалить" />
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <div>
+                    <form action="#" th:action="@{/shopcart/orderset}" method="post">
+                        <input type="submit" value="Заказать" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
